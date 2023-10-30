@@ -19,12 +19,14 @@ namespace DataAccessLayer.Repositories.Concretes
         }
         public void Add(T entity)
         {
+            entity.InsertedDate = DateTime.Now;
             _db.Add(entity);
             _db.SaveChanges();
         }
 
         public void Delete(T entity)
         {
+            entity.DeletedDate = DateTime.Now;
             _db.Remove(entity);
             _db.SaveChanges();
         }
