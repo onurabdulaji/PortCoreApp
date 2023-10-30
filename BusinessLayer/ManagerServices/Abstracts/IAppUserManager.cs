@@ -10,5 +10,6 @@ namespace BusinessLayer.ManagerServices.Abstracts
     public interface IAppUserManager : IManager<AppUser>
     {
         Task<bool> CreateUser(AppUser item, string Password);
+        Task<bool> LoginUser(string userName, string password);
     }
 }

@@ -22,5 +22,15 @@ namespace BusinessLayer.ManagerServices.Concretes
             var result = await _iappUserRepository.AddUser(item, Password);
             return result;
         }
+
+        public async Task<bool> LoginUser(string userName, string password)
+        {
+            if (userName == null && password == null)
+            {
+                return false;
+            }
+            var result = await _iappUserRepository.LoginUser(userName, password);
+            return result;
+        }
     }
 }

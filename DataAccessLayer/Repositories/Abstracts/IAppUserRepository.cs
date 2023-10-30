@@ -10,5 +10,6 @@ namespace DataAccessLayer.Repositories.Abstracts
     public interface IAppUserRepository : IRepository<AppUser>
     {
         Task<bool> AddUser(AppUser item, string Password);
+        Task<bool> LoginUser(string userName, string password);
     }
 }

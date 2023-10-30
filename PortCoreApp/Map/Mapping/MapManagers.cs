@@ -9,6 +9,7 @@ namespace PortCoreApp.Map.Mapping
         public MapManagers()
         {
             CreateMap<SignUpVM, AppUser>();
+            CreateMap<SignInVM, AppUser>();
 
         }
     }
