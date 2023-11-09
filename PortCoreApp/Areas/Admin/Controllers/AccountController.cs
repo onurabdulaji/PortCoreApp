@@ -9,7 +9,7 @@ namespace PortCoreApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [AllowAnonymous]
-    [Route("Admin/Account")]
+    //[Route("Admin/Account")]
     public class AccountController : Controller
     {
         IAppUserManager _iappUserManager;
@@ -20,7 +20,6 @@ namespace PortCoreApp.Areas.Admin.Controllers
             _iappUserManager = iappUserManager;
             _emailSenderService = emailSenderService;
         }
-
         [Route("Index")]
         public IActionResult Index()
         {
@@ -28,7 +27,7 @@ namespace PortCoreApp.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        [Route("SignUp")]
+        //[Route("SignUp")]
         public IActionResult SignUp()
         {
             return View();
@@ -36,7 +35,7 @@ namespace PortCoreApp.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("SignUp")]
+        //[Route("SignUp")]
         public async Task<IActionResult> SignUp(SignUpVM signInVM)
         {
             var newUser = new AppUser
@@ -59,23 +58,21 @@ namespace PortCoreApp.Areas.Admin.Controllers
             }
             return View(signInVM);
         }
-
         [Route("RegisterOk")]
         public ActionResult RegisterOk()
         {
             return View();
         }
 
-
-        [Route("Activation")]
+        //[Route("Activation")]
         public IActionResult Activation(Guid id)
         {
-            AppUser newUserneedtoActived = _iappUserManager.TFirstOrDefault(x => x.EmailConfirmationToken == id);
-            if (newUserneedtoActived != null)
+            AppUser userNeedToBeActive = _iappUserManager.TFirstOrDefault(x => x.EmailConfirmationToken == id);
+            if (userNeedToBeActive != null)
             {
-                newUserneedtoActived.EmailConfirmed = true;
-                newUserneedtoActived.IsEmailConfirmed = true;
-                _iappUserManager.TUpdate(newUserneedtoActived);
+                userNeedToBeActive.EmailConfirmed = true;
+                userNeedToBeActive.IsEmailConfirmed = true;
+                _iappUserManager.TUpdate(userNeedToBeActive);
                 TempData["AccountActiveIs"] = "Your account has been activated";
                 return RedirectToAction("SignIn", "Account");
             }
@@ -85,17 +82,15 @@ namespace PortCoreApp.Areas.Admin.Controllers
                 return RedirectToAction("SignUp", "Account");
             }
         }
-
-        [Route("SignIn")]
+        //[Route("SignIn")]
         public IActionResult SignIn()
         {
             ViewBag.Title1 = "Welcome to Admin Portal";
             ViewBag.Title2 = "Please enter your credentials for login.";
             return View();
         }
-
         [HttpPost]
-        [Route("SignIn")]
+        //[Route("SignIn")]
         public async Task<IActionResult> SignIn(SignInVM signInVM)
         {
             if (ModelState.IsValid)
